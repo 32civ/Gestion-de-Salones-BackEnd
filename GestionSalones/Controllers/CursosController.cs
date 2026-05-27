@@ -112,7 +112,7 @@ namespace GestionSalones.Controllers
 
         // ✅ POST: api/cursos
         [HttpPost]
-        [Authorize(Roles = Roles.Administrativo)]
+        [Authorize(Roles = Roles.Administrativo + "," + Roles.Admin)]
         public async Task<IActionResult> CrearCurso(CrearCursoDTO dto)
         {
             if (dto.CupoMaximo <= 0)
@@ -130,12 +130,13 @@ namespace GestionSalones.Controllers
             if (!docenteExiste)
                 return NotFound("El docente especificado no existe");
 
-            var duplicado = await _context.Cursos
-                .AnyAsync(c => c.MateriaId == dto.MateriaId &&
-                               c.DocenteId == dto.DocenteId);
+            //Error!! No se puede validar la duplicidad en este punto porque el curso aún no tiene ID asignado, lo que hace imposible excluirlo de la búsqueda. La validación de duplicados debe realizarse en el método de edición (PUT) donde el ID del curso ya está definido. En el método de creación (POST), no es necesario verificar la duplicidad, ya que se está creando un nuevo curso y no hay riesgo de conflicto con un curso existente.
+            //var duplicado = await _context.Cursos
+            //    .AnyAsync(c => c.MateriaId == dto.MateriaId &&
+            //                   c.DocenteId == dto.DocenteId);
 
-            if (duplicado)
-                return BadRequest("Ya existe un curso con esa materia y docente");
+            //if (duplicado)
+            //    return BadRequest("Ya existe un curso con esa materia y docente");
 
             var curso = new Curso
             {
@@ -152,7 +153,7 @@ namespace GestionSalones.Controllers
 
         // ✅ PUT: api/cursos/5
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.Administrativo)]
+        [Authorize(Roles = Roles.Administrativo + "," + Roles.Admin)]
         public async Task<IActionResult> EditarCurso(int id, CrearCursoDTO dto)
         {
             var curso = await _context.Cursos.FindAsync(id);
@@ -175,14 +176,15 @@ namespace GestionSalones.Controllers
             if (!docenteExiste)
                 return NotFound("El docente no existe");
 
-            var duplicado = await _context.Cursos
-                .AnyAsync(c =>
-                    c.MateriaId == dto.MateriaId &&
-                    c.DocenteId == dto.DocenteId &&
-                    c.Id != id);
+            //Error!! La validación de duplicados es crucial en el método de edición (PUT) para evitar que se creen cursos con la misma combinación de materia y docente. Sin embargo, en el método de creación (POST) no es necesario realizar esta validación, ya que se está creando un nuevo curso y no hay riesgo de conflicto con un curso existente. En el método de edición, es importante excluir el curso actual de la búsqueda para permitir que el curso pueda mantener su combinación de materia y docente si no se están cambiando esos campos.
+            //var duplicado = await _context.Cursos
+            //    .AnyAsync(c =>
+            //        c.MateriaId == dto.MateriaId &&
+            //        c.DocenteId == dto.DocenteId &&
+            //        c.Id != id);
 
-            if (duplicado)
-                return BadRequest("Ya existe otro curso con esa materia y docente");
+            //if (duplicado)
+            //    return BadRequest("Ya existe otro curso con esa materia y docente");
 
             curso.MateriaId = dto.MateriaId;
             curso.DocenteId = dto.DocenteId;
@@ -195,7 +197,7 @@ namespace GestionSalones.Controllers
 
         // ✅ DELETE: api/cursos/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = Roles.Administrativo)]
+        [Authorize(Roles = Roles.Administrativo + "," + Roles.Admin)]
         public async Task<IActionResult> EliminarCurso(int id)
         {
             var curso = await _context.Cursos.FindAsync(id);

@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|c:\\users\\user\\source\\repos\\asp_proyecto\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|c:\\users\\user\\source\\repos\\asp_proyecto\\controllers\\datos\\contextobd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|solutionrelative:controllers\\datos\\contextobd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|c:\\users\\user\\source\\repos\\asp_proyecto\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Controllers\\citasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\citasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Migrations\\20260513175741_primeraMigracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20260513175741_primeraMigracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|c:\\users\\user\\source\\repos\\asp_proyecto\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|c:\\users\\user\\source\\repos\\asp_proyecto\\models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB684E64-AC69-4E74-BF35-B2221D954F3C}|ASP_Proyecto.csproj|solutionrelative:models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-13T18:09:12.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "citasController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Controllers\\citasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\citasController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Controllers\\citasController.cs",
+              "RelativeToolTip": "Controllers\\citasController.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T18:06:02.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20260513175741_primeraMigracion.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Migrations\\20260513175741_primeraMigracion.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260513175741_primeraMigracion.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Migrations\\20260513175741_primeraMigracion.cs",
+              "RelativeToolTip": "Migrations\\20260513175741_primeraMigracion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T17:57:42.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T17:52:40.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "contextoBD.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Controllers\\Datos\\contextoBD.cs",
+              "RelativeDocumentMoniker": "Controllers\\Datos\\contextoBD.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Controllers\\Datos\\contextoBD.cs",
+              "RelativeToolTip": "Controllers\\Datos\\contextoBD.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T17:51:56.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-13T17:49:30.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "cita.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Models\\cita.cs",
+              "RelativeDocumentMoniker": "Models\\cita.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ASP_Proyecto\\Models\\cita.cs",
+              "RelativeToolTip": "Models\\cita.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T17:48:18.689Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\ProyectoClase\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|C:\\Users\\User\\source\\repos\\ProyectoClase\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|c:\\users\\user\\source\\repos\\proyectoclase\\formularios\\frmingreso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|solutionrelative:formularios\\frmingreso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|c:\\users\\user\\source\\repos\\proyectoclase\\formularios\\frmingreso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|solutionrelative:formularios\\frmingreso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|c:\\users\\user\\source\\repos\\proyectoclase\\formularios\\frminformevtapcto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|solutionrelative:formularios\\frminformevtapcto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|C:\\Users\\User\\source\\repos\\ProyectoClase\\formularios\\frminformevtapcto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{78B81555-A7EE-410B-9FBE-E72004EED80A}|ProyectoClase.csproj|solutionrelative:formularios\\frminformevtapcto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmIngreso.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmIngreso.cs",
+              "RelativeDocumentMoniker": "Formularios\\frmIngreso.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmIngreso.cs",
+              "RelativeToolTip": "Formularios\\frmIngreso.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAIwE0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T23:54:39.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmIngreso.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmIngreso.cs",
+              "RelativeDocumentMoniker": "Formularios\\frmIngreso.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmIngreso.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Formularios\\frmIngreso.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T23:54:34.788Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "frmInformeVtaPcto.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmInformeVtaPcto.cs",
+              "RelativeDocumentMoniker": "Formularios\\frmInformeVtaPcto.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmInformeVtaPcto.cs",
+              "RelativeToolTip": "Formularios\\frmInformeVtaPcto.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAmwB4AAAChAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-27T18:17:33.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frmInformeVtaPcto.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmInformeVtaPcto.cs",
+              "RelativeDocumentMoniker": "Formularios\\frmInformeVtaPcto.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Formularios\\frmInformeVtaPcto.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Formularios\\frmInformeVtaPcto.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-27T18:09:40.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\ProyectoClase\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAADwvxAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-27T17:35:59.195Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

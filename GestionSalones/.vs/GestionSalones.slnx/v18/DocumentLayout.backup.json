@@ -3,40 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\GestionSalones\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\materiascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\materiascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\aprobacionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\aprobacionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\carrerascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\carrerascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\asignacionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\asignacionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\recursoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\recursoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\salonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\salonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\dtos\\createrecursodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:dtos\\createrecursodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\models\\materia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:models\\materia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\models\\carrera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:models\\carrera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\controllers\\cursoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:controllers\\cursoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\models\\carrera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|solutionrelative:models\\carrera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F22C68D5-EB4D-70B1-7211-AAD9076E3D18}|GestionSalones.csproj|c:\\users\\user\\source\\repos\\gestionsalones\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -54,7 +38,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -67,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -81,69 +65,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MateriasController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\MateriasController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MateriasController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\MateriasController.cs",
-              "RelativeToolTip": "Controllers\\MateriasController.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAIwKgAAABDAAAAAAAAAA==",
+              "Title": "AprobacionesController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\AprobacionesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AprobacionesController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\AprobacionesController.cs",
+              "RelativeToolTip": "Controllers\\AprobacionesController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCYAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T21:10:14.27Z",
+              "WhenOpened": "2026-05-27T05:08:19.995Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CarrerasController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\CarrerasController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CarrerasController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\CarrerasController.cs",
-              "RelativeToolTip": "Controllers\\CarrerasController.cs",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAcwGQAAABDAAAAAAAAAA==",
+              "Title": "AsignacionesController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\AsignacionesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AsignacionesController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\AsignacionesController.cs",
+              "RelativeToolTip": "Controllers\\AsignacionesController.cs",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAwwKYAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T21:09:06.28Z",
+              "WhenOpened": "2026-05-25T22:29:31.324Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "RecursosController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\RecursosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\RecursosController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\RecursosController.cs",
-              "RelativeToolTip": "Controllers\\RecursosController.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAADwv5UAAAAAAAAAAAAAAA==",
+              "Title": "CursosController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\CursosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CursosController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\CursosController.cs",
+              "RelativeToolTip": "Controllers\\CursosController.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAkwLIAAAAdAgAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T21:48:34.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-23T00:00:05.231Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CreateRecursoDTO.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\DTOs\\CreateRecursoDTO.cs",
-              "RelativeDocumentMoniker": "DTOs\\CreateRecursoDTO.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\DTOs\\CreateRecursoDTO.cs",
-              "RelativeToolTip": "DTOs\\CreateRecursoDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T21:47:48.206Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UsuariosController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\UsuariosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UsuariosController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\UsuariosController.cs",
-              "RelativeToolTip": "Controllers\\UsuariosController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T14:01:10.326Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "Carrera.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Models\\Carrera.cs",
               "RelativeDocumentMoniker": "Models\\Carrera.cs",
@@ -152,31 +111,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-20T04:35:28.364Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Materia.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Models\\Materia.cs",
-              "RelativeDocumentMoniker": "Models\\Materia.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Models\\Materia.cs",
-              "RelativeToolTip": "Models\\Materia.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T04:31:08.532Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SalonesController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\SalonesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SalonesController.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\GestionSalones\\Controllers\\SalonesController.cs",
-              "RelativeToolTip": "Controllers\\SalonesController.cs",
-              "ViewState": "AgIAANAAAAAAAAAAAAAwwOEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T04:55:46.144Z",
-              "EditorCaption": ""
             }
           ]
         }

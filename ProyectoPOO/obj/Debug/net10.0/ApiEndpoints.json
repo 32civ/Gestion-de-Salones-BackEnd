@@ -1,0 +1,101 @@
+[
+  {
+    "ContainingType": "ProyectoPOO.Controllers.AsignacionesController",
+    "Method": "AsignarAutomatico",
+    "RelativePath": "api/Asignaciones/auto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "grupoId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "horarioId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoPOO.Controllers.GrupoController",
+    "Method": "Crear",
+    "RelativePath": "api/Grupo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "grupo",
+        "Type": "ProyectoPOO.Models.Grupo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoPOO.Controllers.GrupoController",
+    "Method": "Obtener",
+    "RelativePath": "api/Grupo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoPOO.Controllers.HorariosController",
+    "Method": "Crear",
+    "RelativePath": "api/Horarios",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "horario",
+        "Type": "ProyectoPOO.Models.Horario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoPOO.Controllers.HorariosController",
+    "Method": "Obtener",
+    "RelativePath": "api/Horarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoPOO.Controllers.SalonesController",
+    "Method": "Crear",
+    "RelativePath": "api/Salones",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "salon",
+        "Type": "ProyectoPOO.Models.Salon",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoPOO.Controllers.SalonesController",
+    "Method": "Obtener",
+    "RelativePath": "api/Salones",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

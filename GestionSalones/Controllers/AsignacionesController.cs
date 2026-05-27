@@ -155,6 +155,17 @@ namespace GestionSalones.Controllers
                 .Select(a => a.SalonId)
                 .ToListAsync();
 
+            // Verificar que el docente no tenga otro curso en ese mismo horario
+            var docenteOcupado = await _context.Asignaciones
+                .AnyAsync(a =>
+                    a.HorarioId == dto.HorarioId &&
+                    a.Curso.DocenteId == curso.DocenteId &&
+                    a.Estado != "Cancelada"
+                );
+
+            if (docenteOcupado)
+                return BadRequest("El docente ya tiene una clase asignada en ese horario");
+
             // 5️⃣ Buscar salones disponibles que cumplan capacidad y recursos
             var salonesDisponibles = await _context.Salones
                 .Include(s => s.SalonRecursos)
@@ -239,6 +250,17 @@ namespace GestionSalones.Controllers
             // Verificar que la capacidad sea suficiente
             if (salon.Capacidad < curso.CupoMaximo)
                 return BadRequest($"El salón tiene capacidad para {salon.Capacidad} pero el curso necesita {curso.CupoMaximo}");
+
+            // Verificar que el docente no tenga otro curso en ese mismo horario
+            var docenteOcupado = await _context.Asignaciones
+                .AnyAsync(a =>
+                    a.HorarioId == dto.HorarioId &&
+                    a.Curso.DocenteId == curso.DocenteId &&
+                    a.Estado != "Cancelada"
+                );
+
+            if (docenteOcupado)
+                return BadRequest("El docente ya tiene una clase asignada en ese horario");
 
             var asignacion = new Asignacion
             {

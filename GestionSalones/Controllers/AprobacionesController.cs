@@ -36,6 +36,7 @@ namespace GestionSalones.Controllers
                 .Select(ad => new
                 {
                     ad.Id,
+                    ad.AsignacionId,//<---- si algo falla este es el culpable
                     Docente = ad.Docente.Usuario.Nombre,
                     Curso = ad.Asignacion.Curso.Materia.Nombre,
                     Salon = ad.Asignacion.Salon.Nombre,
