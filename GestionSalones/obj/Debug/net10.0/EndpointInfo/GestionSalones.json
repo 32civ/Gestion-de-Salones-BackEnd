@@ -656,6 +656,18 @@
         }
       }
     },
+    "/api/Cursos/mis-cursos": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Docentes": {
       "get": {
         "tags": [

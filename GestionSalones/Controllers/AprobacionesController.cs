@@ -20,7 +20,7 @@ namespace GestionSalones.Controllers
 
         // ✅ GET: api/aprobaciones
         [HttpGet]
-        [Authorize(Roles = Roles.Admin + "," + Roles.Administrativo)]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Administrativo + "," + Roles.Docente)]
         public async Task<IActionResult> GetAprobaciones()
         {
             var aprobaciones = await _context.AprobacionesDocente

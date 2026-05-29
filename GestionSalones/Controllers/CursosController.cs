@@ -223,5 +223,53 @@ namespace GestionSalones.Controllers
             return Ok(new { message = "Curso eliminado correctamente" });
         }
 
+        // ✅ GET: api/cursos/mis-cursos
+        [HttpGet("mis-cursos")]
+        [Authorize(Roles = Roles.Docente + "," + Roles.Administrativo)]
+        public async Task<IActionResult> GetMisCursos()
+        {
+            // Identificar al usuario por email (igual que en MiPerfil)
+            var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrWhiteSpace(email))
+                return Unauthorized("No se pudo identificar al usuario");
+
+            // Buscar el Docente a través de su Usuario por email
+            var docente = await _context.Docentes
+                .AsNoTracking()
+                .FirstOrDefaultAsync(d => d.Usuario.Email == email);
+
+            if (docente == null)
+                return NotFound("No se encontró un perfil de docente para este usuario");
+
+            
+            var cursos = await _context.Cursos
+                .AsNoTracking()
+                .Where(c => c.DocenteId == docente.Id)
+                .Select(c => new
+                {
+                    c.Id,
+                    Materia = c.Materia.Nombre,
+                    Carrera = c.Materia.Carrera.Nombre,
+                    c.CupoMaximo,
+                    EstudiantesMatriculados = _context.Matriculas.Count(m => m.CursoId == c.Id), // Depronto si, depronto no
+                    Asignacion = c.Asignaciones
+                        .Select(a => new
+                        {
+                            Salon = a.Salon.Nombre,
+                            Dia = a.Horario.DiaSemana,
+                            HoraInicio = a.Horario.HoraInicio.ToString(@"hh\:mm"),
+                            HoraFin = a.Horario.HoraFin.ToString(@"hh\:mm"),
+                            Recursos = a.Salon.SalonRecursos
+                                          .Select(sr => sr.Recurso.Nombre).ToList(),
+                            a.Estado
+                        })
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
+
+            return Ok(cursos);
+        }
+
     }
 }

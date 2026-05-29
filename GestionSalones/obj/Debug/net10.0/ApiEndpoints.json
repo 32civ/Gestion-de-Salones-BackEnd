@@ -425,6 +425,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GestionSalones.Controllers.CursosController",
+    "Method": "GetMisCursos",
+    "RelativePath": "api/Cursos/mis-cursos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GestionSalones.Controllers.DocentesController",
     "Method": "GetDocentes",
     "RelativePath": "api/Docentes",

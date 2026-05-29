@@ -151,16 +151,19 @@ namespace GestionSalones.Controllers
 
             // 4️⃣ Obtener salones ocupados en ese horario
             var salonesOcupados = await _context.Asignaciones
-                .Where(a => a.HorarioId == dto.HorarioId)
-                .Select(a => a.SalonId)
-                .ToListAsync();
+                .Where(a => a.HorarioId == dto.HorarioId
+                     && a.Estado != "Rechazado"
+                     && a.Estado != "Cancelada")
+                    .Select(a => a.SalonId)
+                    .ToListAsync();
 
             // Verificar que el docente no tenga otro curso en ese mismo horario
             var docenteOcupado = await _context.Asignaciones
                 .AnyAsync(a =>
                     a.HorarioId == dto.HorarioId &&
                     a.Curso.DocenteId == curso.DocenteId &&
-                    a.Estado != "Cancelada"
+                    a.Estado != "Cancelada" &&
+                    a.Estado != "Rechazado"
                 );
 
             if (docenteOcupado)
@@ -242,7 +245,10 @@ namespace GestionSalones.Controllers
 
             // Verificar que el salón esté libre en ese horario
             var salonOcupado = await _context.Asignaciones
-                .AnyAsync(a => a.SalonId == dto.SalonId && a.HorarioId == dto.HorarioId);
+                .AnyAsync(a => a.SalonId == dto.SalonId
+                           && a.HorarioId == dto.HorarioId
+                           && a.Estado != "Rechazado"
+                           && a.Estado != "Cancelada");
 
             if (salonOcupado)
                 return BadRequest("El salón ya está ocupado en ese horario");
