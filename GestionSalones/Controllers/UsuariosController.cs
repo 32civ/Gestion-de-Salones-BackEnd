@@ -319,6 +319,7 @@ namespace GestionSalones.Controllers
         {
             var usuario = await _context.Usuarios
                 .Include(u => u.UsuarioRoles)
+                .ThenInclude(ur => ur.Rol) // Error, ahora Rol no llega null
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (usuario == null)

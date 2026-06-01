@@ -176,6 +176,29 @@ namespace GestionSalones.Controllers
             if (!docenteExiste)
                 return NotFound("El docente no existe");
 
+            // ✅ Si el docente cambió, resetear asignaciones rechazadas
+            if (curso.DocenteId != dto.DocenteId)
+            {
+                // Buscar asignaciones rechazadas de este curso
+                var asignacionesRechazadas = await _context.Asignaciones
+                    .Where(a => a.CursoId == id && a.Estado == "Rechazado")
+                    .ToListAsync();
+
+                foreach (var asignacion in asignacionesRechazadas)
+                {
+                    // Resetear estado a Pendiente para el nuevo docente
+                    asignacion.Estado = "Pendiente";
+
+                    // Eliminar el registro de rechazo en AprobacionesDocente
+                    // para que no quede el historial del docente anterior
+                    var aprobacionAnterior = await _context.AprobacionesDocente
+                        .FirstOrDefaultAsync(ap => ap.AsignacionId == asignacion.Id);
+
+                    if (aprobacionAnterior != null)
+                        _context.AprobacionesDocente.Remove(aprobacionAnterior);
+                }
+            }
+
             //Error!! La validación de duplicados es crucial en el método de edición (PUT) para evitar que se creen cursos con la misma combinación de materia y docente. Sin embargo, en el método de creación (POST) no es necesario realizar esta validación, ya que se está creando un nuevo curso y no hay riesgo de conflicto con un curso existente. En el método de edición, es importante excluir el curso actual de la búsqueda para permitir que el curso pueda mantener su combinación de materia y docente si no se están cambiando esos campos.
             //var duplicado = await _context.Cursos
             //    .AnyAsync(c =>
@@ -206,7 +229,8 @@ namespace GestionSalones.Controllers
                 return NotFound("Curso no encontrado");
 
             var tieneAsignaciones = await _context.Asignaciones
-                .AnyAsync(a => a.CursoId == id);
+             .AnyAsync(a => a.CursoId == id &&
+                            a.Estado != "Cancelada");
 
             if (tieneAsignaciones)
                 return BadRequest("No se puede eliminar el curso porque tiene asignaciones activas");
@@ -217,11 +241,36 @@ namespace GestionSalones.Controllers
             if (tieneMatriculas)
                 return BadRequest("No se puede eliminar el curso porque tiene estudiantes matriculados");
 
+            // ✅ Eliminar registros relacionados antes de eliminar el curso
+
+            // 1. Aprobaciones vinculadas a las asignaciones del curso
+            var asignacionIds = await _context.Asignaciones
+                .Where(a => a.CursoId == id)
+                .Select(a => a.Id)
+                .ToListAsync();
+
+            if (asignacionIds.Any())
+            {
+                var aprobaciones = await _context.AprobacionesDocente
+                    .Where(ap => asignacionIds.Contains(ap.AsignacionId))
+                    .ToListAsync();
+                _context.AprobacionesDocente.RemoveRange(aprobaciones);
+            }
+
+            // 2. Asignaciones canceladas/rechazadas del curso
+            var asignaciones = await _context.Asignaciones
+                .Where(a => a.CursoId == id)
+                .ToListAsync();
+            _context.Asignaciones.RemoveRange(asignaciones);
+
+            // 3. Eliminar el curso
             _context.Cursos.Remove(curso);
+
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Curso eliminado correctamente" });
         }
+        
 
         // ✅ GET: api/cursos/mis-cursos
         [HttpGet("mis-cursos")]
