@@ -99,6 +99,7 @@ namespace GestionSalones.Controllers
         public async Task<IActionResult> GetConflictos()
         {
             var conflictos = await _context.Asignaciones
+                .Where(a => a.Estado != "Cancelada" && a.Estado != "Rechazado")
                 .GroupBy(a => new { a.SalonId, a.HorarioId })
                 .Where(g => g.Count() > 1)
                 .Select(g => new { g.Key.SalonId, g.Key.HorarioId, TotalConflictos = g.Count() })
@@ -133,9 +134,9 @@ namespace GestionSalones.Controllers
 
             // ✅ Ignorar rechazadas y canceladas al buscar salones ocupados
             var salonesOcupados = await _context.Asignaciones
-                .Where(a => a.HorarioId == dto.HorarioId
-                         && a.Estado != "Rechazado"
-                         && a.Estado != "Cancelada")
+                .Where(a => a.HorarioId == dto.HorarioId &&
+                            a.Estado != "Cancelada" &&
+                            a.Estado != "Rechazado")
                 .Select(a => a.SalonId)
                 .ToListAsync();
 

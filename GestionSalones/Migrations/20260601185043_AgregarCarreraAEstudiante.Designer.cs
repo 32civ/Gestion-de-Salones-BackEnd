@@ -4,6 +4,7 @@ using GestionSalones.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionSalones.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260601185043_AgregarCarreraAEstudiante")]
+    partial class AgregarCarreraAEstudiante
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,16 +121,11 @@ namespace GestionSalones.Migrations
                     b.Property<int>("MateriaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SemestreId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DocenteId");
 
                     b.HasIndex("MateriaId");
-
-                    b.HasIndex("SemestreId");
 
                     b.ToTable("Cursos");
                 });
@@ -233,21 +231,12 @@ namespace GestionSalones.Migrations
                     b.Property<int>("EstudianteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SemestreId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CursoId");
 
-                    b.HasIndex("SemestreId");
-
                     b.HasIndex("EstudianteId", "CursoId")
                         .IsUnique();
-
-                    b.HasIndex("EstudianteId", "CursoId", "SemestreId")
-                        .IsUnique()
-                        .HasFilter("[SemestreId] IS NOT NULL");
 
                     b.ToTable("Matriculas");
                 });
@@ -328,32 +317,6 @@ namespace GestionSalones.Migrations
                         .IsUnique();
 
                     b.ToTable("SalonRecursos");
-                });
-
-            modelBuilder.Entity("GestionSalones.Models.Semestre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("FechaFin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Nombre")
-                        .IsUnique();
-
-                    b.ToTable("Semestres");
                 });
 
             modelBuilder.Entity("GestionSalones.Models.UsuarioRol", b =>
@@ -472,16 +435,9 @@ namespace GestionSalones.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GestionSalones.Models.Semestre", "Semestre")
-                        .WithMany("Cursos")
-                        .HasForeignKey("SemestreId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Docente");
 
                     b.Navigation("Materia");
-
-                    b.Navigation("Semestre");
                 });
 
             modelBuilder.Entity("GestionSalones.Models.Docente", b =>
@@ -537,16 +493,9 @@ namespace GestionSalones.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GestionSalones.Models.Semestre", "Semestre")
-                        .WithMany("Matriculas")
-                        .HasForeignKey("SemestreId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Curso");
 
                     b.Navigation("Estudiante");
-
-                    b.Navigation("Semestre");
                 });
 
             modelBuilder.Entity("GestionSalones.Models.SalonRecurso", b =>
@@ -610,13 +559,6 @@ namespace GestionSalones.Migrations
             modelBuilder.Entity("GestionSalones.Models.Salon", b =>
                 {
                     b.Navigation("SalonRecursos");
-                });
-
-            modelBuilder.Entity("GestionSalones.Models.Semestre", b =>
-                {
-                    b.Navigation("Cursos");
-
-                    b.Navigation("Matriculas");
                 });
 
             modelBuilder.Entity("GestionSalones.Models.Usuarios", b =>

@@ -99,7 +99,7 @@ namespace GestionSalones.Services
                         <table width="100%" cellpadding="0" cellspacing="0">
                           <tr>
                             <td align="center">
-                              <a href="#" style="display:inline-block;padding:12px 32px;background:#E8611A;color:#ffffff;text-decoration:none;border-radius:10px;font-size:14px;font-weight:700;">
+                              <a href="https://youtu.be/y_U6GGH7MSk?si=mHunbSq7-LBp5sh5" style="display:inline-block;padding:12px 32px;background:#E8611A;color:#ffffff;text-decoration:none;border-radius:10px;font-size:14px;font-weight:700;">
                                 Ver mi asignación
                               </a>
                             </td>

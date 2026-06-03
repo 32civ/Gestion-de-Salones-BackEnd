@@ -20,6 +20,7 @@ namespace GestionSalones.Data
         public DbSet<Materia> Materias { get; set; }
 
         public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Semestre> Semestres { get; set; }
 
         // 🏫 Infraestructura
         public DbSet<Salon> Salones { get; set; }
@@ -155,6 +156,29 @@ namespace GestionSalones.Data
             // 🔥 Evitar duplicar recursos en el mismo salón
             modelBuilder.Entity<SalonRecurso>()
                 .HasIndex(sr => new { sr.SalonId, sr.RecursoId })
+                .IsUnique();
+
+            // 📅 Semestre
+            modelBuilder.Entity<Semestre>()
+                .HasIndex(s => s.Nombre)
+                .IsUnique();
+
+            modelBuilder.Entity<Curso>()
+                .HasOne(c => c.Semestre)
+                .WithMany(s => s.Cursos)
+                .HasForeignKey(c => c.SemestreId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Matricula>()
+                .HasOne(m => m.Semestre)
+                .WithMany(s => s.Matriculas)
+                .HasForeignKey(m => m.SemestreId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Actualizar el indice único de Matricula para incluir semestre
+            // (reemplaza el índice anterior que solo tenía EstudianteId + CursoId)
+            modelBuilder.Entity<Matricula>()
+                .HasIndex(m => new { m.EstudianteId, m.CursoId, m.SemestreId })
                 .IsUnique();
         }
     }

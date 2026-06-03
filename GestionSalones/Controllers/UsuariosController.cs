@@ -29,16 +29,18 @@ namespace GestionSalones.Controllers
             var usuarios = await _context.Usuarios
                 .AsNoTracking()
                 .Include(u => u.UsuarioRoles)
-                    .ThenInclude(ur => ur.Rol)
+                .ThenInclude(ur => ur.Rol)
                 .Select(u => new
                 {
                     u.Id,
                     u.Nombre,
                     u.Email,
                     u.Activo,
-                    Roles = u.UsuarioRoles
-                        .Select(ur => ur.Rol.Nombre)
-                        .ToList()
+                    Roles = u.UsuarioRoles.Select(ur => ur.Rol.Nombre).ToList(),
+                    Carrera = _context.Estudiantes
+                    .Where(e => e.UsuarioId == u.Id)
+                    .Select(e => e.Carrera.Nombre)
+                    .FirstOrDefault()
                 })
                 .ToListAsync();
 
@@ -319,60 +321,108 @@ namespace GestionSalones.Controllers
         {
             var usuario = await _context.Usuarios
                 .Include(u => u.UsuarioRoles)
-                .ThenInclude(ur => ur.Rol) // Error, ahora Rol no llega null
+                    .ThenInclude(ur => ur.Rol)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (usuario == null)
                 return NotFound("Usuario no encontrado");
 
-            // =====================================================
             // ✅ Evitar eliminar admins
-            // =====================================================
-
             var esAdmin = usuario.UsuarioRoles
                 .Any(ur => ur.Rol.Nombre == Roles.Admin);
 
             if (esAdmin)
                 return BadRequest("No se puede eliminar un administrador");
 
-            // =====================================================
-            // ✅ Eliminar relaciones
-            // =====================================================
-
-            var relaciones = await _context.UsuarioRoles
-                .Where(ur => ur.UsuarioId == id)
-                .ToListAsync();
-
-            _context.UsuarioRoles.RemoveRange(relaciones);
-
-            // =====================================================
-            // ✅ Eliminar entidades especiales
-            // =====================================================
-
+            // ✅ Validaciones especiales para docentes
             var docente = await _context.Docentes
                 .FirstOrDefaultAsync(d => d.UsuarioId == id);
 
             if (docente != null)
-                _context.Docentes.Remove(docente);
+            {
+                // 1️⃣ Debe estar desactivado para poder eliminarlo
+                if (usuario.Activo)
+                    return BadRequest("Debes desactivar al docente antes de eliminarlo");
 
+                // 2️⃣ No puede tener cursos con asignaciones activas
+                var tieneAsignacionesActivas = await _context.Asignaciones
+                    .AnyAsync(a =>
+                        a.Curso.DocenteId == docente.Id &&
+                        (a.Estado == "Pendiente" || a.Estado == "Aprobado")
+                    );
+
+                if (tieneAsignacionesActivas)
+                    return BadRequest("El docente tiene asignaciones activas. Cancélalas antes de eliminar al docente");
+
+                // 3️⃣ Eliminar registros relacionados en orden correcto
+                // Aprobaciones → Asignaciones → Cursos → Docente
+
+                var cursoIds = await _context.Cursos
+                    .Where(c => c.DocenteId == docente.Id)
+                    .Select(c => c.Id)
+                    .ToListAsync();
+
+                if (cursoIds.Any())
+                {
+                    var asignacionIds = await _context.Asignaciones
+                        .Where(a => cursoIds.Contains(a.CursoId))
+                        .Select(a => a.Id)
+                        .ToListAsync();
+
+                    if (asignacionIds.Any())
+                    {
+                        var aprobaciones = await _context.AprobacionesDocente
+                            .Where(ap => asignacionIds.Contains(ap.AsignacionId))
+                            .ToListAsync();
+                        _context.AprobacionesDocente.RemoveRange(aprobaciones);
+
+                        var asignaciones = await _context.Asignaciones
+                            .Where(a => asignacionIds.Contains(a.Id))
+                            .ToListAsync();
+                        _context.Asignaciones.RemoveRange(asignaciones);
+                    }
+
+                    // Verificar que los cursos no tengan matrículas
+                    var tieneMatriculas = await _context.Matriculas
+                        .AnyAsync(m => cursoIds.Contains(m.CursoId));
+
+                    if (tieneMatriculas)
+                        return BadRequest("El docente tiene cursos con estudiantes matriculados. Cancela las matrículas antes de eliminar al docente");
+
+                    var cursos = await _context.Cursos
+                        .Where(c => c.DocenteId == docente.Id)
+                        .ToListAsync();
+                    _context.Cursos.RemoveRange(cursos);
+                }
+
+                _context.Docentes.Remove(docente);
+            }
+
+            // ✅ Eliminar estudiante si aplica
             var estudiante = await _context.Estudiantes
                 .FirstOrDefaultAsync(e => e.UsuarioId == id);
 
             if (estudiante != null)
-                _context.Estudiantes.Remove(estudiante);
+            {
+                var tieneMatriculas = await _context.Matriculas
+                    .AnyAsync(m => m.EstudianteId == estudiante.Id);
 
-            // =====================================================
-            // ✅ Eliminar usuario
-            // =====================================================
+                if (tieneMatriculas)
+                    return BadRequest("El estudiante tiene matrículas activas. Cancélalas antes de eliminarlo");
+
+                _context.Estudiantes.Remove(estudiante);
+            }
+
+            // ✅ Eliminar roles y usuario
+            var relaciones = await _context.UsuarioRoles
+                .Where(ur => ur.UsuarioId == id)
+                .ToListAsync();
+            _context.UsuarioRoles.RemoveRange(relaciones);
 
             _context.Usuarios.Remove(usuario);
-
             await _context.SaveChangesAsync();
 
-            return Ok(new
-            {
-                message = "Usuario eliminado correctamente"
-            });
+            return Ok(new { message = "Usuario eliminado correctamente" });
         }
 
     }

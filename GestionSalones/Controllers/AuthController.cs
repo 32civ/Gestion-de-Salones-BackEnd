@@ -158,7 +158,8 @@ namespace GestionSalones.Controllers
             {
                 _context.Estudiantes.Add(new Estudiante
                 {
-                    UsuarioId = usuario.Id
+                    UsuarioId = usuario.Id,
+                    CarreraId = dto.CarreraId //<--- cambio de ultimo momento para asignar carrera al estudiante
                 });
             }
 

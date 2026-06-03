@@ -29,6 +29,7 @@ namespace GestionSalones.Controllers
                 .Select(e => new
                 {
                     e.Id,
+                    e.UsuarioId,
                     e.Usuario.Nombre,
                     e.Usuario.Email,
                     e.Usuario.Activo,
@@ -75,6 +76,7 @@ namespace GestionSalones.Controllers
                 return Unauthorized("Usuario no encontrado");
 
             var estudiante = await _context.Estudiantes
+                .Include(e => e.Carrera) // ✅ incluir carrera
                 .FirstOrDefaultAsync(e => e.UsuarioId == usuario.Id);
 
             if (estudiante == null)
@@ -89,6 +91,8 @@ namespace GestionSalones.Controllers
                 usuario.Nombre,
                 usuario.Email,
                 usuario.Activo,
+                Carrera = estudiante.Carrera?.Nombre ?? "Sin carrera asignada",
+                CarreraId = estudiante.CarreraId,
                 TotalMateriasMatriculadas = totalMaterias
             });
         }
@@ -161,6 +165,29 @@ namespace GestionSalones.Controllers
         public IActionResult GetCalificaciones()
         {
             return Ok(new { message = "Sistema de calificaciones próximamente" });
+        }
+
+        // ✅ PUT: api/estudiantes/5/carrera
+        [HttpPut("{id}/carrera")]
+        [Authorize(Roles = Roles.Administrativo)]
+        public async Task<IActionResult> AsignarCarrera(int id, [FromBody] int carreraId)
+        {
+            var estudiante = await _context.Estudiantes
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (estudiante == null)
+                return NotFound("Estudiante no encontrado");
+
+            var carreraExiste = await _context.Carreras
+                .AnyAsync(c => c.Id == carreraId);
+
+            if (!carreraExiste)
+                return NotFound("Carrera no encontrada");
+
+            estudiante.CarreraId = carreraId;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Carrera asignada correctamente" });
         }
 
     }

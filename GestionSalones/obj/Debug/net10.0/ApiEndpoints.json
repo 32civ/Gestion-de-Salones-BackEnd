@@ -435,6 +435,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "GestionSalones.Controllers.CursosController",
+    "Method": "GetTodosCursos",
+    "RelativePath": "api/Cursos/todos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "GestionSalones.Controllers.DocentesController",
     "Method": "GetDocentes",
     "RelativePath": "api/Docentes",
@@ -560,6 +570,27 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.EstudiantesController",
+    "Method": "AsignarCarrera",
+    "RelativePath": "api/Estudiantes/{id}/carrera",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "carreraId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -800,6 +831,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.MatriculasController",
+    "Method": "GetCursosDisponibles",
+    "RelativePath": "api/Matriculas/cursos-disponibles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -1121,6 +1162,95 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.SemestresController",
+    "Method": "GetSemestres",
+    "RelativePath": "api/Semestres",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.SemestresController",
+    "Method": "CrearSemestre",
+    "RelativePath": "api/Semestres",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "GestionSalones.DTOs.CrearSemestreDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.SemestresController",
+    "Method": "GetSemestre",
+    "RelativePath": "api/Semestres/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.SemestresController",
+    "Method": "EditarSemestre",
+    "RelativePath": "api/Semestres/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "GestionSalones.DTOs.CrearSemestreDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.SemestresController",
+    "Method": "EliminarSemestre",
+    "RelativePath": "api/Semestres/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionSalones.Controllers.SemestresController",
+    "Method": "GetSemestreActivo",
+    "RelativePath": "api/Semestres/activo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

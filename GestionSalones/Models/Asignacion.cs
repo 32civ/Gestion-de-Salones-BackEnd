@@ -8,7 +8,7 @@
         public int SalonId { get; set; }
         public int HorarioId { get; set; }
 
-        public string Estado { get; set; } // Pendiente, Aprobado
+        public string Estado { get; set; } // Pendiente, Aprobado, cancelado
 
         public Curso Curso { get; set; }
         public Salon Salon { get; set; }

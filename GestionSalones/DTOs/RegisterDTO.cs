@@ -8,6 +8,7 @@
 
         public string Password { get; set; } = string.Empty;
 
+        public int? CarreraId { get; set; }
         // Roles.Admin
         // Roles.Administrativo
         // Roles.Docente

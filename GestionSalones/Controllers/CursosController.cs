@@ -4,7 +4,7 @@ using GestionSalones.Helpers;
 using GestionSalones.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionSalones.Controllers
 {
@@ -12,7 +12,6 @@ namespace GestionSalones.Controllers
     [Route("api/[controller]")]
     public class CursosController : ControllerBase
     {
-
         private readonly AppDbContext _context;
 
         public CursosController(AppDbContext context)
@@ -20,19 +19,55 @@ namespace GestionSalones.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/cursos
+        // ── Helper: obtener semestre activo ───────────────────────────────
+        private async Task<Semestre?> GetSemestreActivoAsync()
+        {
+            var ahora = DateTime.Now;
+            return await _context.Semestres
+                .FirstOrDefaultAsync(s => s.FechaInicio <= ahora && s.FechaFin >= ahora);
+        }
+
+        // ✅ GET: api/cursos — filtra por semestre activo
         [HttpGet]
         [Authorize(Roles = Roles.Admin + "," + Roles.Administrativo + "," + Roles.Docente + "," + Roles.Estudiante)]
         public async Task<IActionResult> GetCursos()
         {
+            var semestre = await GetSemestreActivoAsync();
+            if (semestre == null)
+                return NotFound("No hay un semestre activo. Contacta al administrador.");
+
             var cursos = await _context.Cursos
                 .AsNoTracking()
+                .Where(c => c.SemestreId == semestre.Id) // ← filtro por semestre
                 .Select(c => new CursoListDTO
                 {
                     Id = c.Id,
                     Materia = c.Materia.Nombre,
                     Docente = c.Docente.Usuario.Nombre,
                     CupoMaximo = c.CupoMaximo,
+                    SalonAsignado = c.Asignaciones
+                        .Select(a => a.Salon.Nombre)
+                        .FirstOrDefault() ?? "Sin asignar"
+                })
+                .ToListAsync();
+
+            return Ok(cursos);
+        }
+
+        // ✅ GET: api/cursos/todos — todos los cursos sin filtro de semestre (para reportes)
+        [HttpGet("todos")]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Administrativo)]
+        public async Task<IActionResult> GetTodosCursos()
+        {
+            var cursos = await _context.Cursos
+                .AsNoTracking()
+                .Select(c => new
+                {
+                    c.Id,
+                    Materia = c.Materia.Nombre,
+                    Docente = c.Docente.Usuario.Nombre,
+                    c.CupoMaximo,
+                    Semestre = c.Semestre.Nombre,
                     SalonAsignado = c.Asignaciones
                         .Select(a => a.Salon.Nombre)
                         .FirstOrDefault() ?? "Sin asignar"
@@ -81,12 +116,8 @@ namespace GestionSalones.Controllers
         [Authorize(Roles = Roles.Admin + "," + Roles.Administrativo + "," + Roles.Docente + "," + Roles.Estudiante)]
         public async Task<IActionResult> GetSalonDelCurso(int id)
         {
-            var existe = await _context.Cursos
-                .AsNoTracking()
-                .AnyAsync(c => c.Id == id);
-
-            if (!existe)
-                return NotFound("Curso no encontrado");
+            var existe = await _context.Cursos.AsNoTracking().AnyAsync(c => c.Id == id);
+            if (!existe) return NotFound("Curso no encontrado");
 
             var salon = await _context.Asignaciones
                 .AsNoTracking()
@@ -95,8 +126,7 @@ namespace GestionSalones.Controllers
                 {
                     Salon = a.Salon.Nombre,
                     a.Salon.Capacidad,
-                    Recursos = a.Salon.SalonRecursos
-                        .Select(sr => sr.Recurso.Nombre).ToList(),
+                    Recursos = a.Salon.SalonRecursos.Select(sr => sr.Recurso.Nombre).ToList(),
                     Dia = a.Horario.DiaSemana,
                     HoraInicio = a.Horario.HoraInicio.ToString(@"hh\:mm"),
                     HoraFin = a.Horario.HoraFin.ToString(@"hh\:mm"),
@@ -110,7 +140,7 @@ namespace GestionSalones.Controllers
             return Ok(salon);
         }
 
-        // ✅ POST: api/cursos
+        // ✅ POST: api/cursos — asigna automáticamente el semestre activo
         [HttpPost]
         [Authorize(Roles = Roles.Administrativo + "," + Roles.Admin)]
         public async Task<IActionResult> CrearCurso(CrearCursoDTO dto)
@@ -118,31 +148,23 @@ namespace GestionSalones.Controllers
             if (dto.CupoMaximo <= 0)
                 return BadRequest("El cupo máximo debe ser mayor a 0");
 
-            var materiaExiste = await _context.Materias
-                .AnyAsync(m => m.Id == dto.MateriaId);
+            // Verificar semestre activo
+            var semestre = await GetSemestreActivoAsync();
+            if (semestre == null)
+                return BadRequest("No hay un semestre activo. Crea uno antes de agregar cursos.");
 
-            if (!materiaExiste)
-                return NotFound("La materia especificada no existe");
+            var materiaExiste = await _context.Materias.AnyAsync(m => m.Id == dto.MateriaId);
+            if (!materiaExiste) return NotFound("La materia especificada no existe");
 
-            var docenteExiste = await _context.Docentes
-                .AnyAsync(d => d.Id == dto.DocenteId);
-
-            if (!docenteExiste)
-                return NotFound("El docente especificado no existe");
-
-            //Error!! No se puede validar la duplicidad en este punto porque el curso aún no tiene ID asignado, lo que hace imposible excluirlo de la búsqueda. La validación de duplicados debe realizarse en el método de edición (PUT) donde el ID del curso ya está definido. En el método de creación (POST), no es necesario verificar la duplicidad, ya que se está creando un nuevo curso y no hay riesgo de conflicto con un curso existente.
-            //var duplicado = await _context.Cursos
-            //    .AnyAsync(c => c.MateriaId == dto.MateriaId &&
-            //                   c.DocenteId == dto.DocenteId);
-
-            //if (duplicado)
-            //    return BadRequest("Ya existe un curso con esa materia y docente");
+            var docenteExiste = await _context.Docentes.AnyAsync(d => d.Id == dto.DocenteId);
+            if (!docenteExiste) return NotFound("El docente especificado no existe");
 
             var curso = new Curso
             {
                 MateriaId = dto.MateriaId,
                 DocenteId = dto.DocenteId,
-                CupoMaximo = dto.CupoMaximo
+                CupoMaximo = dto.CupoMaximo,
+                SemestreId = semestre.Id  // ← asigna el semestre activo automáticamente
             };
 
             _context.Cursos.Add(curso);
@@ -157,64 +179,40 @@ namespace GestionSalones.Controllers
         public async Task<IActionResult> EditarCurso(int id, CrearCursoDTO dto)
         {
             var curso = await _context.Cursos.FindAsync(id);
-
-            if (curso == null)
-                return NotFound("Curso no encontrado");
+            if (curso == null) return NotFound("Curso no encontrado");
 
             if (dto.CupoMaximo <= 0)
                 return BadRequest("El cupo máximo debe ser mayor a 0");
 
-            var materiaExiste = await _context.Materias
-                .AnyAsync(m => m.Id == dto.MateriaId);
+            var materiaExiste = await _context.Materias.AnyAsync(m => m.Id == dto.MateriaId);
+            if (!materiaExiste) return NotFound("La materia no existe");
 
-            if (!materiaExiste)
-                return NotFound("La materia no existe");
+            var docenteExiste = await _context.Docentes.AnyAsync(d => d.Id == dto.DocenteId);
+            if (!docenteExiste) return NotFound("El docente no existe");
 
-            var docenteExiste = await _context.Docentes
-                .AnyAsync(d => d.Id == dto.DocenteId);
-
-            if (!docenteExiste)
-                return NotFound("El docente no existe");
-
-            // ✅ Si el docente cambió, resetear asignaciones rechazadas
+            // Si el docente cambió, resetear asignaciones rechazadas
             if (curso.DocenteId != dto.DocenteId)
             {
-                // Buscar asignaciones rechazadas de este curso
                 var asignacionesRechazadas = await _context.Asignaciones
                     .Where(a => a.CursoId == id && a.Estado == "Rechazado")
                     .ToListAsync();
 
                 foreach (var asignacion in asignacionesRechazadas)
                 {
-                    // Resetear estado a Pendiente para el nuevo docente
                     asignacion.Estado = "Pendiente";
-
-                    // Eliminar el registro de rechazo en AprobacionesDocente
-                    // para que no quede el historial del docente anterior
                     var aprobacionAnterior = await _context.AprobacionesDocente
                         .FirstOrDefaultAsync(ap => ap.AsignacionId == asignacion.Id);
-
                     if (aprobacionAnterior != null)
                         _context.AprobacionesDocente.Remove(aprobacionAnterior);
                 }
             }
 
-            //Error!! La validación de duplicados es crucial en el método de edición (PUT) para evitar que se creen cursos con la misma combinación de materia y docente. Sin embargo, en el método de creación (POST) no es necesario realizar esta validación, ya que se está creando un nuevo curso y no hay riesgo de conflicto con un curso existente. En el método de edición, es importante excluir el curso actual de la búsqueda para permitir que el curso pueda mantener su combinación de materia y docente si no se están cambiando esos campos.
-            //var duplicado = await _context.Cursos
-            //    .AnyAsync(c =>
-            //        c.MateriaId == dto.MateriaId &&
-            //        c.DocenteId == dto.DocenteId &&
-            //        c.Id != id);
-
-            //if (duplicado)
-            //    return BadRequest("Ya existe otro curso con esa materia y docente");
-
             curso.MateriaId = dto.MateriaId;
             curso.DocenteId = dto.DocenteId;
             curso.CupoMaximo = dto.CupoMaximo;
+            // SemestreId no cambia al editar
 
             await _context.SaveChangesAsync();
-
             return Ok(curso);
         }
 
@@ -224,84 +222,68 @@ namespace GestionSalones.Controllers
         public async Task<IActionResult> EliminarCurso(int id)
         {
             var curso = await _context.Cursos.FindAsync(id);
-
-            if (curso == null)
-                return NotFound("Curso no encontrado");
+            if (curso == null) return NotFound("Curso no encontrado");
 
             var tieneAsignaciones = await _context.Asignaciones
-             .AnyAsync(a => a.CursoId == id &&
-                            a.Estado != "Cancelada");
-
+                .AnyAsync(a => a.CursoId == id && a.Estado != "Cancelada");
             if (tieneAsignaciones)
                 return BadRequest("No se puede eliminar el curso porque tiene asignaciones activas");
 
             var tieneMatriculas = await _context.Matriculas
                 .AnyAsync(m => m.CursoId == id);
-
             if (tieneMatriculas)
                 return BadRequest("No se puede eliminar el curso porque tiene estudiantes matriculados");
 
-            // ✅ Eliminar registros relacionados antes de eliminar el curso
-
-            // 1. Aprobaciones vinculadas a las asignaciones del curso
             var asignacionIds = await _context.Asignaciones
-                .Where(a => a.CursoId == id)
-                .Select(a => a.Id)
-                .ToListAsync();
+                .Where(a => a.CursoId == id).Select(a => a.Id).ToListAsync();
 
             if (asignacionIds.Any())
             {
                 var aprobaciones = await _context.AprobacionesDocente
-                    .Where(ap => asignacionIds.Contains(ap.AsignacionId))
-                    .ToListAsync();
+                    .Where(ap => asignacionIds.Contains(ap.AsignacionId)).ToListAsync();
                 _context.AprobacionesDocente.RemoveRange(aprobaciones);
             }
 
-            // 2. Asignaciones canceladas/rechazadas del curso
             var asignaciones = await _context.Asignaciones
-                .Where(a => a.CursoId == id)
-                .ToListAsync();
+                .Where(a => a.CursoId == id).ToListAsync();
             _context.Asignaciones.RemoveRange(asignaciones);
 
-            // 3. Eliminar el curso
             _context.Cursos.Remove(curso);
-
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Curso eliminado correctamente" });
         }
-        
 
-        // ✅ GET: api/cursos/mis-cursos
+        // ✅ GET: api/cursos/mis-cursos — filtra por semestre activo
         [HttpGet("mis-cursos")]
         [Authorize(Roles = Roles.Docente + "," + Roles.Administrativo)]
         public async Task<IActionResult> GetMisCursos()
         {
-            // Identificar al usuario por email (igual que en MiPerfil)
             var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
-
             if (string.IsNullOrWhiteSpace(email))
                 return Unauthorized("No se pudo identificar al usuario");
 
-            // Buscar el Docente a través de su Usuario por email
             var docente = await _context.Docentes
                 .AsNoTracking()
                 .FirstOrDefaultAsync(d => d.Usuario.Email == email);
-
             if (docente == null)
                 return NotFound("No se encontró un perfil de docente para este usuario");
 
-            
+            var semestre = await GetSemestreActivoAsync();
+            if (semestre == null)
+                return NotFound("No hay un semestre activo en este momento");
+
             var cursos = await _context.Cursos
                 .AsNoTracking()
-                .Where(c => c.DocenteId == docente.Id)
+                .Where(c => c.DocenteId == docente.Id && c.SemestreId == semestre.Id) // ← filtro
                 .Select(c => new
                 {
                     c.Id,
                     Materia = c.Materia.Nombre,
                     Carrera = c.Materia.Carrera.Nombre,
+                    Semestre = c.Semestre.Nombre,
                     c.CupoMaximo,
-                    EstudiantesMatriculados = _context.Matriculas.Count(m => m.CursoId == c.Id), // Depronto si, depronto no
+                    EstudiantesMatriculados = _context.Matriculas.Count(m => m.CursoId == c.Id),
                     Asignacion = c.Asignaciones
                         .Select(a => new
                         {
@@ -309,8 +291,7 @@ namespace GestionSalones.Controllers
                             Dia = a.Horario.DiaSemana,
                             HoraInicio = a.Horario.HoraInicio.ToString(@"hh\:mm"),
                             HoraFin = a.Horario.HoraFin.ToString(@"hh\:mm"),
-                            Recursos = a.Salon.SalonRecursos
-                                          .Select(sr => sr.Recurso.Nombre).ToList(),
+                            Recursos = a.Salon.SalonRecursos.Select(sr => sr.Recurso.Nombre).ToList(),
                             a.Estado
                         })
                         .FirstOrDefault()
@@ -319,6 +300,5 @@ namespace GestionSalones.Controllers
 
             return Ok(cursos);
         }
-
     }
 }
