@@ -33,6 +33,7 @@ namespace GestionSalones.Controllers
 
             if (semestreActivo == null)
                 return NotFound("No hay un semestre activo");
+            //hola
 
             var asignaciones = await _context.Asignaciones
                 .Include(a => a.Curso)
