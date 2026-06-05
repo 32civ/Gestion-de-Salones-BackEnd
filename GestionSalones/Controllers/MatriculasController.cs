@@ -135,6 +135,21 @@ namespace GestionSalones.Controllers
             if (yaMatriculado)
                 return BadRequest("Ya estás matriculado en este curso");
 
+            
+            var cursoNuevo = await _context.Cursos
+                .Include(c => c.Materia)
+                .FirstOrDefaultAsync(c => c.Id == cursoId);
+
+            var yaTieneMateriaIgual = await _context.Matriculas
+                .Include(m => m.Curso)
+                    .ThenInclude(c => c.Materia)
+                .AnyAsync(m => m.EstudianteId == estudiante.Id
+                            && m.SemestreId == semestre.Id
+                            && m.Curso.Materia.Nombre == cursoNuevo.Materia.Nombre);
+
+            if (yaTieneMateriaIgual)
+                return BadRequest($"Ya estás matriculado en '{cursoNuevo.Materia.Nombre}' este semestre");
+
             var totalMatriculados = await _context.Matriculas
                 .CountAsync(m => m.CursoId == cursoId && m.SemestreId == semestre.Id);
             if (totalMatriculados >= curso.CupoMaximo)
@@ -210,12 +225,18 @@ namespace GestionSalones.Controllers
                 .Select(m => m.CursoId)
                 .ToListAsync();
 
+            var materiasMatriculadas = await _context.Matriculas
+                .Where(m => m.EstudianteId == estudiante.Id && m.SemestreId == semestre.Id)
+                .Select(m => m.Curso.Materia.Nombre)
+                .ToListAsync();
+
             var cursosRaw = await _context.Cursos
                 .AsNoTracking()
                 .Where(c =>
                     c.SemestreId == semestre.Id &&                          // ← solo semestre activo
                     c.Materia.CarreraId == estudiante.CarreraId &&
                     !cursosMatriculados.Contains(c.Id) &&
+                    !materiasMatriculadas.Contains(c.Materia.Nombre) &&
                     !c.Asignaciones.Any(a => a.Estado == "Cancelado"))
                 .Select(c => new
                 {

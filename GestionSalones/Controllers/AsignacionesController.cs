@@ -27,6 +27,13 @@ namespace GestionSalones.Controllers
         [Authorize(Roles = Roles.Admin + "," + Roles.Administrativo + "," + Roles.Docente)]
         public async Task<IActionResult> GetAsignaciones()
         {
+            var ahora = DateTime.Now;
+            var semestreActivo = await _context.Semestres
+                .FirstOrDefaultAsync(s => s.FechaInicio <= ahora && s.FechaFin >= ahora);
+
+            if (semestreActivo == null)
+                return NotFound("No hay un semestre activo");
+
             var asignaciones = await _context.Asignaciones
                 .Include(a => a.Curso)
                     .ThenInclude(c => c.Materia)
@@ -35,6 +42,7 @@ namespace GestionSalones.Controllers
                         .ThenInclude(d => d.Usuario)
                 .Include(a => a.Salon)
                 .Include(a => a.Horario)
+                .Where(a => a.Curso.SemestreId == semestreActivo.Id)
                 .Select(a => new
                 {
                     a.Id,
@@ -48,6 +56,7 @@ namespace GestionSalones.Controllers
                     a.Estado
                 })
                 .ToListAsync<object>();
+
 
             return Ok(asignaciones);
         }
@@ -140,6 +149,20 @@ namespace GestionSalones.Controllers
                 .Select(a => a.SalonId)
                 .ToListAsync();
 
+            var docenteOcupado = await _context.Asignaciones
+                .Include(a => a.Horario)
+                .Include(a => a.Curso)
+                .AnyAsync(a =>
+                    a.Curso.DocenteId == curso.DocenteId &&
+                    a.Horario.DiaSemana == horario.DiaSemana &&
+                    a.Horario.HoraInicio < horario.HoraFin &&
+                    a.Horario.HoraFin > horario.HoraInicio &&
+                    a.Estado != "Rechazado" &&
+                    a.Estado != "Cancelada");
+
+            if (docenteOcupado)
+                return BadRequest($"El docente ya tiene una clase asignada ese día en ese horario");
+
             var salonesDisponibles = await _context.Salones
                 .Include(s => s.SalonRecursos)
                 .Where(s =>
@@ -222,6 +245,20 @@ namespace GestionSalones.Controllers
                             && a.Estado != "Cancelada");
 
             if (salonOcupado) return BadRequest("El salón ya está ocupado en ese horario");
+
+            var docenteOcupado = await _context.Asignaciones
+                .Include(a => a.Horario)
+                .Include(a => a.Curso)
+                .AnyAsync(a =>
+                    a.Curso.DocenteId == curso.DocenteId &&
+                    a.Horario.DiaSemana == horario.DiaSemana &&
+                    a.Horario.HoraInicio < horario.HoraFin &&
+                    a.Horario.HoraFin > horario.HoraInicio &&
+                    a.Estado != "Rechazado" &&
+                    a.Estado != "Cancelada");
+
+            if (docenteOcupado)
+                return BadRequest($"El docente ya tiene una clase asignada ese día en ese horario");
 
             if (salon.Capacidad < curso.CupoMaximo)
                 return BadRequest($"El salón tiene capacidad para {salon.Capacidad} pero el curso necesita {curso.CupoMaximo}");
